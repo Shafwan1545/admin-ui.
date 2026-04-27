@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
 
 function UserCard(props) {
-const{name, email, street, city}=props;
+const{name, email, street, city, age, ...rest}=props;
 const [clicked, setClicked] = useState(false);
+
+console.log(Object.entries(rest));
 
   // Fungsi handler
   function handleClick() {
@@ -18,6 +20,16 @@ const [clicked, setClicked] = useState(false);
       <p className="text-gray-600">
         <span className="font-medium">Address:</span> {street}, {city}
       </p>
+      <p className="text-gray-600">
+        <span className="font-medium">Age:</span> {age}
+      </p>
+
+            {/* Menampilkan data tambahan dari rest */}
+      {Object.entries(rest).map(([key, value]) => (
+        <p key={key} className="text-gray-600">
+          <span className="font-medium capitalize">{key}:</span> {value}
+        </p>
+      ))}
 
         <button 
 className={`${clicked ? "bg-special-green" : "bg-gray-01"} text-white p-2 rounded-md`}
