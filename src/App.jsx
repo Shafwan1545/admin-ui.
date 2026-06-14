@@ -1,12 +1,42 @@
 import "./App.css";
-import SigninPage from "./Pages/SigninPage";
+// 1. Pastikan jalur import ini benar mengarah ke folder pages kamu
+import SignInPage from "./pages/SignInPage"; 
+import SignUpPage from "./pages/SignupPage"; 
+import ErrorPage from "./pages/error";
+import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
 
 function App() {
-  return(
+  const myRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        	<div className="flex justify-center items-center min-h-screen">
+          <Link to="/login" className="p-2 m-5 bg-primary text-white">
+            Login
+          </Link>
+          |
+          <Link to="/register" className="p-2 m-5 bg-primary text-white">
+            Register
+          </Link>
+        </div>
+      ),
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/login",
+      element: <SignInPage />, 
+    },
+    {
+      path: "/register",
+      element: <SignUpPage />,
+    },
+  ]);
+
+  return (
     <>
-    <SigninPage/>
+      <RouterProvider router={myRouter} />
     </>
-  )
+  );
 }
 
 export default App;
